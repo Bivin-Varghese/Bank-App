@@ -1,0 +1,130 @@
+<!-- navbar  -->
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4pBhIin-Q_Y6o3lFkfX5dnMMS4MOE-XlQOMlS0VUyxY_PjXv3BK-hIvqficB4lFIxg1abMYbzQHs&usqp=CAU&ec=48665698"
+                alt="Logo" width="50" height="44" class="d-inline-block align-text-top">
+            New Bank
+        </a>
+    </div>
+</nav>
+
+<!-- register loading  -->
+<div *ngIf="regSuccessloading"  class="container text-center">
+    <h2>    Your data is getting registerd
+        <img class="w-25" src="https://i.stack.imgur.com/kOnzy.gif" alt="">
+    </h2>
+</div>
+
+<!-- main-content  -->
+
+<div *ngIf="!regSuccessloading" class="container">
+    <div class="row">
+        <div class="col-6">
+            <img class="img-fluid"
+                src="https://media.istockphoto.com/id/1208447875/vector/people-registering-online-with-user-interface-users-use-secure-login-and-password-concept-of.jpg?s=612x612&w=is&k=20&c=L-CN7k17e03qaIoudrlnRqF4b8h8PC7mSP8qKF6Ddtc="
+                alt="">
+        </div>
+        <div class="col-6">
+
+            <h1 class="text-center mt-4 mb-3">Register Here</h1>
+
+            <!-- form  -->
+
+            <form [formGroup]="registerForm" (ngSubmit)="register()" class=" border border-2 shadow p-5 text-center"
+                action="">
+                <div class="form-floating mb-3">
+                    <input name="acno" formControlName="acno" type="email" class="form-control" id="floatingInput"
+                        placeholder="name@example.com">
+                    <label for="floatingInput">Account Number </label>
+
+                    <div class="alert"
+                        *ngIf="this.registerForm.get('acno')?.errors && this.registerForm.get('acno')?.touched"
+                        class="text-danger float-start">Invalid Account Number </div>
+
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <input name="username" formControlName="username" type="" class="form-control" id="floatingPassword"
+                        placeholder="Password">
+                    <label for="floatingPassword">Username</label>
+
+                    <div class="alert"
+                        *ngIf="this.registerForm.get('username')?.errors && this.registerForm.get('username')?.touched"
+                        class="text-danger float-start">Invalid Account Number </div>
+
+                </div>
+
+
+                <div class="form-floating ">
+                    <input name="password" formControlName="password" type="password" class="form-control"
+                        id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+
+                    <div class="alert"
+                        *ngIf="this.registerForm.get('password')?.errors && this.registerForm.get('password')?.touched"
+                        class="text-danger float-start">Invalid Account Number
+                    </div>
+
+                </div>
+
+                <div class="">
+                    <h6 class="text-danger text-center mt-3">{{regErrorMsg}}</h6>
+                </div>
+
+                <div class="mt-4">
+
+                    <button class="btn bg-primary " type="submit">Register</button>
+                </div>
+
+
+                <p class="mt-3">Already have a account <a href="">login</a> </p>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- footer  -->
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>

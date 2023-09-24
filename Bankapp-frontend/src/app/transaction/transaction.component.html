@@ -1,0 +1,131 @@
+<!-- navbar  -->
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4pBhIin-Q_Y6o3lFkfX5dnMMS4MOE-XlQOMlS0VUyxY_PjXv3BK-hIvqficB4lFIxg1abMYbzQHs&usqp=CAU&ec=48665698"
+                alt="Logo" width="50" height="44" class="d-inline-block align-text-top">
+            New Bank
+        </a>
+
+        <div class="btn-group me-5">
+            <button class="btn btn-secondary dropdown-toggle me-5" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Services
+            </button>
+            <ul class="dropdown-menu">
+                <li> <a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample">
+                        <i class="fa-solid fa-money-check "></i> Balance Enquiry </a></li>
+
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer </a></li>
+
+                <li><a class="dropdown-item" routerLink="/transactions">
+                        <i class="fa-solid fa-book"></i> Transaction history </a></li>
+
+                <li><a class="dropdown-item">
+                        <i class="fa-sharp fa-solid fa-trash"></i> Remove Account </a></li>
+
+                <li><a class="dropdown-item" (click)="logout()">
+                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i> logout </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- transaction content -->
+<div class="container">
+    <h1 class="text-center">Transaction History</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est vel ea libero vero voluptas! Odit, nostrum mollitia!
+        Adipisci odio numquam sit molestias sunt aperiam magni perferendis. Tempora, architecto!</p>
+
+    <div class="row">
+
+        <div class="col-6">
+            <!-- input tag for searching  -->
+            <input [(ngModel)]="searchTerm" type="text" class="form-control">
+        </div>
+
+        <div class="col-6">
+            <button (click)="exportPdf()" class="btn btn-primary float-end">Export as pdf</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- table for transaction details  -->
+    <div class="row">
+        <div class="col">
+            <!-- <caption class="mt-5">All transaction history</caption> -->
+            <p class="mt-5">All Transaction History </p>
+
+            <table class="mb-5 border">
+                <thead>
+                    <tr class="border border-2 ">
+                        <th class="border border-2">Ref No</th>
+                        <th class="border border-2">Type</th>
+                        <th class="border border-2">From Account</th>
+                        <th class="border border-2">To Account</th>
+                        <th class="border border-2">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of allTransactions | search:searchTerm:'type' ; let i = index ">
+                        <td>{{i+1}}</td>
+                        <td>{{transaction.type}}</td>
+                        <td>{{transaction.fromAcno}}</td>
+                        <td>{{transaction.toAcno}}</td>
+                        <td>{{transaction.amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- footer  -->
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>

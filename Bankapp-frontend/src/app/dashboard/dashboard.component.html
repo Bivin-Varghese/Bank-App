@@ -1,0 +1,270 @@
+<!-- navbar  -->
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4pBhIin-Q_Y6o3lFkfX5dnMMS4MOE-XlQOMlS0VUyxY_PjXv3BK-hIvqficB4lFIxg1abMYbzQHs&usqp=CAU&ec=48665698"
+                alt="Logo" width="50" height="44" class="d-inline-block align-text-top">
+            New Bank
+        </a>
+
+        <div class="btn-group me-5">
+            <button class="btn btn-secondary dropdown-toggle me-5" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Services
+            </button>
+            <ul class="dropdown-menu">
+                <li> <a (click)="getBalance()" class="dropdown-item" data-bs-toggle="offcanvas"
+                        href="#offcanvasExample">
+                        <i class="fa-solid fa-money-check "></i> Balance Enquiry </a></li>
+
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer </a></li>
+
+                <li><a class="dropdown-item" routerLink="/transactions">
+                        <i class="fa-solid fa-book"></i> Transaction history </a></li>
+
+                <li><a class="dropdown-item" (click)="deleteAccount()">
+                        <i class="fa-sharp fa-solid fa-trash"></i> Remove Account </a></li>
+
+                <li><a class="dropdown-item" (click)="logout()">
+                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i> logout </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- delete  -->
+
+<app-delete-account  [deleteAcno]="acno" (onCancel)="cancelDeleteAccount()"
+(onDelete)="deleteFromParent()"
+
+*ngIf="!deleteSuccessStatus">  
+
+</app-delete-account>
+
+
+
+
+
+<!-- logout loading page  -->
+<div style="width: 100%;height: 450px;" *ngIf="logoutStatus">
+    <h1 class="m-5 p-5 text-center">Please wait You are logging out.......
+        <div class="spinner-border text-secondary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden ">Loading...</span>
+        </div>
+    </h1>
+
+</div>
+
+
+<!-- delete -->
+<div style="width: 100%;height: 450px;" *ngIf="deleteSuccessStatus">
+    <h1 class="m-5 p-5 text-center">{{deleteSuccessStatus}} 
+        <div class="spinner-border text-secondary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden ">Loading...</span>
+        </div>
+    </h1>
+
+</div>
+
+
+
+
+<marquee>Deposit rates are raised upto 7%......hurry up</marquee>
+
+<!-- offcanvas  -->
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Balance Enquiry</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div class="">
+            <img src="https://cdn3d.iconscout.com/3d/premium/thumb/money-bag-with-coin-6901595-5651112.png"
+                class="w-100" alt="">
+        </div>
+
+        <div>
+            <h3>Hi {{user}}</h3>
+            <h4>Your current balance is: <span class="text-success">{{balance}}</span> </h4>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- Modal for transaction -->
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <img class="w-100 "
+                    src="https://img.freepik.com/free-vector/people-using-mobile-bank-remittance-money_74855-6617.jpg"
+                    style="height: 280px;" alt="">
+
+                <!-- form  -->
+                <form [formGroup]="transactionForm">
+                    <!-- credit account number  -->
+                    <div class="form-floating mb-3">
+                        <input formControlName="creditAcno" type="text" name="creditAcno" class="form-control"
+                            placeholder="8845784578">
+                        <label>Credit account number</label>
+
+                        <div class="alert"
+                            *ngIf="this.transactionForm.get('creditAcno')?.errors && this.transactionForm.get('creditAcno')?.touched"
+                            class="text-danger float-start">Invalid Account number
+                        </div>
+                    </div>
+
+                    <!-- user password   -->
+                    <div class="form-floating mb-3">
+                        <input formControlName="password" type="password" name="password" class="form-control"
+                            placeholder="password">
+                        <label>Password</label>
+
+                        <div class="alert"
+                            *ngIf="this.transactionForm.get('password')?.errors && this.transactionForm.get('password')?.touched"
+                            class="text-danger float-start">Invalid password
+                        </div>
+                    </div>
+
+                    <!-- amount  -->
+                    <div class="form-floating mb-3">
+                        <input type="text" formControlName="amount" name="amount" class="form-control"
+                            placeholder="Amount">
+                        <label>Amount</label>
+
+                        <div class="alert"
+                            *ngIf="this.transactionForm.get('amount')?.errors && this.transactionForm.get('amount')?.touched"
+                            class="text-danger float-start">Invalid Amount
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+
+            <div class="mt-2 text-success text-center fw-bolder">
+                {{transferSuccess}}
+            </div>
+
+            <div class="mt-2 text-danger text-center fw-bolder">
+                {{trasnferError}}
+            </div>
+
+
+            <div class="modal-footer d-flex justify-content-between px-3">
+                <button (click)="reset()" type="button" class="btn btn-secondary  ">Reset</button>
+
+                <button (click)="fundTransfer()" type="button" class="btn btn-secondary">Transfer</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- main-content  -->
+
+<div class="container py-4" *ngIf="!logoutStatus && !deleteConfirmStatus ">
+    <div class="row">
+        <div class="col-md-5">
+            <!-- img  -->
+            <img class="img-fluid"
+                src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/e3a8f140315683.588080749e2df.gif " alt="">
+        </div>
+
+        <div class="col-md-7">
+            <!-- content -->
+            <!-- heading  -->
+            <h1>Welcome {{user}}</h1>
+            <!-- paragraph  -->
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat quas sapiente voluptas ex eius ut
+                asperiores, exercitationem officia voluptatibus, libero aliquam iure excepturi laborum omnis magni
+                accusantium expedita praesentium sed explicabo reprehenderit deleniti. Lorem ipsum dolor sit amet
+                consectetur adipisicing elit.
+            </p>
+
+            <div class="collapse" id="collapseExample">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima unde perferendis vitae sint,
+                    voluptate, accusantium eaque inventore ex eveniet, pariatur rem provident?
+                </p>
+            </div>
+
+            <button (click)="collapse()" class="btn btn-outline-secondary" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample">Reade
+                <span *ngIf="isCollapse">more</span>
+                <span *ngIf="!isCollapse">less</span>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- footer  -->
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>

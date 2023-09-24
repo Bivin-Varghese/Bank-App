@@ -1,0 +1,58 @@
+
+
+                    Backend for bankapp
+
+1.create Bankapp-backend folder
+2.Create package.json file -> npm init
+3.create index.js file as the entry point for the server
+4.Install Express -> npm i Express
+5.Import express in index.js
+6.using express , create an application : express()
+7.setup port number for server application sharing (CORS)
+8.Install CORS (Cross Orgin Resource Sharing)
+   -to share data with different application(ports) -> npm i cors 
+9.Import cors in index.js
+10.Use cors in server app :serverapp.use(cors())   
+11.parse json data to js in server app : use express.json()
+12.resolving client requests
+    ->server-app.http-method('path',callback function()=>{
+        response send back to client
+    })
+13.auto compilation - npm i -g nodemon
+14.install postman for backend testing
+15.connecting with Mongodb database using mongoose(library)
+16.install mongoose ->npm i mongoose
+17.create a folder services,inside that create a file db.json and logic.js
+18.In db.json
+  -import mongoose and define connection string.
+  -Define connection string
+  -Create model and schema
+  -export the model
+
+19.In logic.js
+  -create logic for api call 
+  -export the funcion
+.
+.
+.
+.
+.
+.
+.
+20.Authentication using JSON web token(jsw token)
+   -it is json object which is used to securely transfer information over the web (bw two parties)
+   -install -> npm i jsonwebtoken
+   -to generate token - sign() - generate token in logic.js(inside login)
+   -using jsw token , we generate token for user who is loged in successfully
+   -import jwt token in index.js
+   -verify token,when client request after sucessful login
+      -login - token generated
+      -getBalance -> + append token -> ? verify?
+
+21.Middleware
+  -control request response cycle
+  -arguments - req,res,next
+  types
+    1.application specific Middleware
+    2.router specific Middleware      
+
